@@ -1,32 +1,44 @@
-const orderByProps = require('./app');
+const extractSpecialAttacks = require('./app');
 
-describe('orderByProps function', () => {
-  it('Должен возвращать массив объектов со свойствами, отсортированными в соответствии с предоставленным порядком', () => {
-    const obj = { name: 'мечник', health: 10, level: 2, attack: 80, defence: 40 };
-    const order = ["name", "level"];
-    const expectedResult = [
-      { key: "name", value: "мечник" },
-      { key: "level", value: 2 },
-      { key: "attack", value: 80 },
-      { key: "defence", value: 40 },
-      { key: "health", value: 10 }
-    ];
+test('Извлечение специальных атак с описанием по умолчанию, если оно не предоставлено.', () => {
+  const character = {
+    name: 'Лучник',
+    type: 'Bowman',
+    health: 50,
+    level: 3,
+    attack: 40,
+    defence: 10,
+    special: [
+      {
+        id: 8,
+        name: 'Двойной выстрел',
+        icon: 'http://...',
+        description: 'Двойной выстрел наносит двойной урон'
+      }, 
+      {
+        id: 9,
+        name: 'Нокаутирующий удар',
+        icon: 'http://...'
+      }
+    ]	
+  };
 
-    expect(orderByProps(obj, order)).toEqual(expectedResult);
-  });
+  const expectedOutput = [
+    {
+      id: 8,
+      name: 'Двойной выстрел',
+      description: 'Двойной выстрел наносит двойной урон',
+      icon: 'http://...'
+    },
+    {
+      id: 9,
+      name: 'Нокаутирующий удар',
+      description: 'Описание недоступно',
+      icon: 'http://...'
+    }
+  ];
 
-  it('Должен возвращать массив объектов с отсортированными по алфавиту свойствами, если они не включены в порядок', () => {
-    const obj = { name: 'мечник', health: 10, level: 2, attack: 80, defence: 40 };
-    const order = ["name", "level"];
-    const expectedResult = [
-      { key: "name", value: "мечник" },
-      { key: "level", value: 2 },
-      { key: "attack", value: 80 },
-      { key: "defence", value: 40 },
-      { key: "health", value: 10 }
-    ];
+  const result = extractSpecialAttacks(character);
 
-    expect(orderByProps(obj, order)).toEqual(expectedResult);
-  });
-
+  expect(result).toEqual(expectedOutput);
 });
