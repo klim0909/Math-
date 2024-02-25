@@ -1,4 +1,11 @@
 module.exports = {
-    testEnvironment: 'node',
-    testMatch: ['<rootDir>/src/**/*.test.js'],
-  };
+  testEnvironment: 'node',
+  testMatch: ["**/*.test.js"],
+},
+{
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
+  }
+}
