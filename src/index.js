@@ -1,1 +1,1 @@
-import './validator.js';
+import './team.js';
