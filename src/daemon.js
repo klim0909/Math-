@@ -14,10 +14,18 @@ class Daemon extends Character {
     return this._stoned;
   }
 
+  set attack(value) {
+    this.baseAttack = value;
+  }
+
+  get attack() {
+    return this.baseAttack;
+  }
+
   calculateAttackModifier() {
     let modifier = super.calculateAttackModifier();
     if (this.stoned) {
-      modifier -= Math.log2(this.distance) * 0.05; // Изменяем эту строку
+      modifier -= Math.log2(this.distance) * 0.05;
     }
     return modifier;
   }

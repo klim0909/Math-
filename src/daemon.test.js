@@ -1,9 +1,8 @@
-const Daemon = require('../src/daemon');
+const Daemon = require('../characters/daemon');
 
-test('calculateAttackModifier calculates correct modifier for stoned daemon', () => {
-  const daemon = new Daemon(120);
-  daemon.setDistance(5);
+test('calculateAttackModifier for Daemon class with stoned = true', () => {
+  const daemon = new Daemon(100);
+  daemon.setDistance(2);
   daemon.stoned = true;
-  const attackModifier = daemon.calculateAttackModifier();
-  console.log("Actual Attack Modifier for stoned Daemon:", attackModifier);
+  expect(daemon.calculateAttackModifier()).toBe(0.95);
 });

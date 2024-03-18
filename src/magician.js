@@ -14,6 +14,14 @@ class Magician extends Character {
     return this._stoned;
   }
 
+  set attack(value) {
+    this.baseAttack = value;
+  }
+
+  get attack() {
+    return this.baseAttack;
+  }
+
   calculateAttackModifier() {
     let modifier = super.calculateAttackModifier();
     if (this.stoned) {
